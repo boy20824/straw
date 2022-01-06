@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax File upload</title>
+    <script src="browser_components/jquery/dist/jquery.js"></script>
+</head>
+<body>
+<form id="uploadForm">
+    <div>
+        <label>選擇上載文件
+            <input type="file" id="imageFile">
+        </label>
+    </div>
+    <button type="submit">提交文件</button>
+</form>
+</body>
+<script src="js/utils.js"></script>
+<script>
+    $(function () {
+        $('#uploadForm').submit(function () {
+            //執行JS的Ajax請求,取消原有的表單請求
+            //找到選擇的文件
+            let files = document.getElementById("imageFile").files
+            if (files.length > 0) {
+                //選擇了文件
+                let file = files[0];
+                uploadImage(file); //向服務器發送文件
+            } else {
+                //沒有選擇文件
+                alert("請選擇文件!")
+            }
+            return false;//取消原有的表單提交功能
+        })
+
+        function uploadImage(file) {
+            //在內存中創建表單對象
+            let form = new FormData();
+            //imageFile必須和控制器的參數變量名一致
+            form.append("imageFile", file)
+            $.ajax({
+                url: "/upload/file",
+                method: "POST",
+                data:form,
+                contentType: false,
+                processData: false,
+                success: function (r) {
+                    console.log(r)
+                    if (r === OK) {
+                        alert(r.message)
+                    } else {
+                        alert(r.message)
+                    }
+                }
+            })
+        }
+    })
+
+</script>
+</html>

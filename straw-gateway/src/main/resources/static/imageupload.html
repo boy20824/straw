@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Upload</title>
+    <script src="browser_components/jquery/dist/jquery.js"></script>
+</head>
+<body>
+<form id="demoForm">
+    <div>
+        <label>選擇上載文件 :
+            <input type="file" id="imageFile">
+        </label>
+    </div>
+    <button type="submit">保存圖片</button>
+</form>
+<img src="" alt="" id="image">
+</body>
+<script src="js/utils.js"></script>
+<script>
+    $(function (){
+        $('#demoForm').submit(function (){
+            let files=document.getElementById("imageFile").files;
+            console.log(files)
+            if(files.length>0){
+                let file=files[0];
+                console.log(file)
+                imageUpload(file);
+            }else{
+                alert('請選擇文件')
+            }
+
+
+            return false;
+        })
+        function imageUpload(file){
+            let form=new FormData();
+            form.append("imageFile",file);
+            $.ajax({
+                url:'/upload/image',
+                method:'POST',
+                data:form,
+                contentType:false,
+                processData:false,
+                success:function (r){
+                    console.log(r);
+                    if(r.code===OK){
+                        let url=r.message;
+                        //顯示上傳的圖片
+                        $('#image').attr('src',url);
+                    }else{
+                        alert(r.message)
+                    }
+                }
+
+            })
+        }
+    })
+</script>
+</html>

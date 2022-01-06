@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VUE DEMO</title>
+    <script src="browser_components/vue/dist/vue.js"></script>
+</head>
+<body>
+<!--聲明vue的視圖-->
+<div id="app">
+<p v-text="message">這是一個演示</p>
+    <input type="text" v-model="desc"/>
+    <button v-on:click="hello">測試</button>
+</div>
+</body>
+<script>
+    // 聲明視圖模型
+    let app = new Vue({
+        el:"#app",
+        data:{
+            message:'Hello Worlde',
+            desc:'Hello Vue.js'
+        },
+        methods:{
+            hello:function (){
+                console.log("點擊了測試")
+                this.message=this.desc
+            }
+        }
+    })
+</script>
+</html>
