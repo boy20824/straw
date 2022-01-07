@@ -45,12 +45,12 @@ public class SystemController {
         return new ModelAndView("register");
     }
 
-    @PostMapping("/register")
     /*
     加上@Validated開啟對RegisterVo對象進行驗證,驗證結果會自動儲存到BindingResult對象中
      validateResult.hasErrors()  用於檢查有無驗證錯誤
      validateResult.getFieldError().getDefaultMessage() 用於獲取驗證期間出現的錯誤訊息
      */
+    @PostMapping("/register")
     public R registerStudent(@Validated RegisterVo registerVo, BindingResult validateResult) {
         log.debug("收到表單數據{}", registerVo);
         //檢查驗證結果是否有錯誤

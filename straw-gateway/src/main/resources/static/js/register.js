@@ -27,7 +27,7 @@ let app = new Vue({
             }
             let _this = this;
             $.ajax({
-                url:"/register",
+                url:"/sys/v1/users/register",
                 method: "POST",
                 data: data,
                 success: function (r) {

@@ -13,4 +13,9 @@ public class HomeController {
         log.debug("轉發到register");
         return "register";
     }
+    
+    @GetMapping("/login.html")
+    public String login(){
+        return "login";
+    }
 }
