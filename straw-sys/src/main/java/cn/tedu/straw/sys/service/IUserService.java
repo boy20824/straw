@@ -1,5 +1,7 @@
 package cn.tedu.straw.sys.service;
 
+import cn.tedu.straw.commons.model.Permission;
+import cn.tedu.straw.commons.model.Role;
 import cn.tedu.straw.commons.model.User;
 import cn.tedu.straw.sys.vo.RegisterVo;
 import cn.tedu.straw.sys.vo.UserVO;
@@ -41,4 +43,10 @@ public interface IUserService extends IService<User> {
      * @return 用戶訊息
      */
     UserVO getCurrentUserVo();
+
+    User getUserByUsername(String username);
+
+    List<Permission> getUserPermissions(Integer userId);
+
+    List<Role> getUserRoles(Integer userId);
 }

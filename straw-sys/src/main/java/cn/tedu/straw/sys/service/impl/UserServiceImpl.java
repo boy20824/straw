@@ -1,8 +1,6 @@
 package cn.tedu.straw.sys.service.impl;
 
-import cn.tedu.straw.commons.model.Classroom;
-import cn.tedu.straw.commons.model.User;
-import cn.tedu.straw.commons.model.UserRole;
+import cn.tedu.straw.commons.model.*;
 import cn.tedu.straw.sys.mapper.ClassroomMapper;
 import cn.tedu.straw.sys.mapper.UserMapper;
 import cn.tedu.straw.sys.mapper.UserRoleMapper;
@@ -163,5 +161,20 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 //        //TODO: 以後增加統計收藏問題的數量
 //        userVO.setQuestions(count).setCollections(0);
         return new UserVO();
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        return userMapper.findUserByUsername(username);
+    }
+
+    @Override
+    public List<Permission> getUserPermissions(Integer userId) {
+        return userMapper.findUserPermissionById(userId);
+    }
+
+    @Override
+    public List<Role> getUserRoles(Integer userId) {
+        return userMapper.findUserRolesById(userId);
     }
 }
