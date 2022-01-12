@@ -3,9 +3,13 @@ package cn.tedu.straw.sys.controller;
 import cn.tedu.straw.commons.vo.R;
 import cn.tedu.straw.sys.service.IUserService;
 import cn.tedu.straw.sys.vo.RegisterVo;
+import cn.tedu.straw.sys.vo.UserVO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,5 +46,17 @@ public class UserController {
 
         iUserService.registerStudent(registerVo);
         return R.created("成功註冊!!");
+    }
+
+    /**
+     * 請求路徑 /sys/v1/users/me
+     * @param userDetails
+     * @return
+     */
+    @GetMapping("/me")
+    public R<UserVO>me(@AuthenticationPrincipal UserDetails userDetails){
+        String username=userDetails.getUsername();
+        UserVO userVO=iUserService.getCurrentUserVo(username);
+        return R.ok(userVO);
     }
 }

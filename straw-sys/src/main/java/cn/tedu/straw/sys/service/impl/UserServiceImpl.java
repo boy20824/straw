@@ -154,13 +154,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public UserVO getCurrentUserVo() {
+    public UserVO getCurrentUserVo(String username) {
 //        String username = currentUsername();
-//        UserVO userVO = userMapper.getUserVoByUsername(username);
+        UserVO userVO = userMapper.getUserVoByUsername(username);
 //        Integer count = iQuestionService.countQuestionsByUserId(userVO.getId());
 //        //TODO: 以後增加統計收藏問題的數量
 //        userVO.setQuestions(count).setCollections(0);
-        return new UserVO();
+        return userVO;
     }
 
     @Override

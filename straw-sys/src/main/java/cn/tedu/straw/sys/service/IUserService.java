@@ -42,7 +42,7 @@ public interface IUserService extends IService<User> {
      * 用戶發布問題數量,用戶收藏問題的數量
      * @return 用戶訊息
      */
-    UserVO getCurrentUserVo();
+    UserVO getCurrentUserVo(String username);
 
     User getUserByUsername(String username);
 

@@ -6,7 +6,7 @@ let userApp = new Vue({
     methods: {
         loadCurrentUser: function () {
             $.ajax({
-                url: '/v1/users/me',
+                url: '/sys/v1/users/me',
                 method: 'GET',
                 success: function (r) {
                     console.log(r)
