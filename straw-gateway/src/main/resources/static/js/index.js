@@ -13,7 +13,7 @@ let questionsApp = new Vue({
                 pageNum = 1;
             }
             $.ajax({
-                url: '/v1/questions/my',
+                url: '/faq/v1/questions/my',
                 method: 'GET',
                 data: {
                     pageNum: pageNum

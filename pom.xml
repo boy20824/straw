@@ -24,6 +24,7 @@
         <module>straw-gateway</module>
         <module>straw-sys</module>
         <module>straw-commons</module>
+        <module>straw-faq</module>
     </modules>
 
     <dependencies>

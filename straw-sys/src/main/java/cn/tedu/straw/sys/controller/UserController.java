@@ -1,5 +1,6 @@
 package cn.tedu.straw.sys.controller;
 
+import cn.tedu.straw.commons.model.User;
 import cn.tedu.straw.commons.vo.R;
 import cn.tedu.straw.sys.service.IUserService;
 import cn.tedu.straw.sys.vo.RegisterVo;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping("/v1/users")
@@ -58,5 +60,12 @@ public class UserController {
         String username=userDetails.getUsername();
         UserVO userVO=iUserService.getCurrentUserVo(username);
         return R.ok(userVO);
+    }
+    /*
+    請求url:/sys/v1/users/masters
+     */
+    @GetMapping("/masters")
+    public List<User> masters(){
+        return  iUserService.getMasters();
     }
 }
