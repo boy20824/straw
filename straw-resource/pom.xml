@@ -22,6 +22,14 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.tedu</groupId>
+            <artifactId>straw-commons</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.tedu</groupId>
+            <artifactId>straw-commons</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

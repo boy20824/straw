@@ -12,7 +12,7 @@ $(document).ready(function () {
                 form.append("imageFile",file);
                 console.log(form);
                 $.ajax({
-                    url:'/upload/image',
+                    url:'/resource/v1/images',
                     method:'POST',
                     data:form,
                     contentType:false,
