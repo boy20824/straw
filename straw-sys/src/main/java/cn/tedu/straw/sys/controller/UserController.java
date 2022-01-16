@@ -52,20 +52,27 @@ public class UserController {
 
     /**
      * 請求路徑 /sys/v1/users/me
+     *
      * @param userDetails
      * @return
      */
     @GetMapping("/me")
-    public R<UserVO>me(@AuthenticationPrincipal UserDetails userDetails){
-        String username=userDetails.getUsername();
-        UserVO userVO=iUserService.getCurrentUserVo(username);
+    public R<UserVO> me(@AuthenticationPrincipal UserDetails userDetails) {
+        String username = userDetails.getUsername();
+        UserVO userVO = iUserService.getCurrentUserVo(username);
         return R.ok(userVO);
     }
+
     /*
     請求url:/sys/v1/users/masters
      */
     @GetMapping("/masters")
-    public List<User> masters(){
-        return  iUserService.getMasters();
+    public List<User> masters() {
+        return iUserService.getMasters();
+    }
+
+    @GetMapping("/master")
+    public R<List<User>> master() {
+        return R.ok(iUserService.getMasters());
     }
 }

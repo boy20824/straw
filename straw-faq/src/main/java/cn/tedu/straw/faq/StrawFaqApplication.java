@@ -19,6 +19,10 @@ public class StrawFaqApplication {
         SpringApplication.run(StrawFaqApplication.class, args);
     }
 
+    /**
+     * 創建RestTemplate,封裝了Ribbon客戶端
+     * @return
+     */
     @Bean
     @LoadBalanced
     public RestTemplate restTemplate(){

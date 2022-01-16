@@ -58,7 +58,7 @@ let createQuestionApp = new Vue({
             };
             console.log(data);
             $.ajax({
-                url: '/v1/questions',
+                url: '/faq/v1/questions',
                 traditional: true,  //采用传统数组编码方式，SpringMVC才能接收
                 method: 'POST',
                 data: data,
@@ -76,7 +76,7 @@ let createQuestionApp = new Vue({
         loadTags: function () {
             console.log('開始加載標籤列表下拉框')
             $.ajax({
-                url: '/v1/tags',
+                url: '/faq/v1/tags',
                 method: 'GET',
                 success: function (r) {
                     console.log(r)
@@ -97,7 +97,7 @@ let createQuestionApp = new Vue({
         loadTeachers: function () {
             console.log("loadTeachers");
             $.ajax({
-                url: '/v1/users/master',
+                url: '/sys/v1/users/master',
                 method: 'GET',
                 success: function (r) {
                     console.log(r);

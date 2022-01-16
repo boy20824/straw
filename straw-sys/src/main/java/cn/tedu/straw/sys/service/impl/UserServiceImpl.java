@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -41,6 +43,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Autowired
     UserRoleMapper userRoleMapper;
+
+    @Resource
+    RestTemplate restTemplate;
 
     BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
@@ -158,8 +163,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 //        String username = currentUsername();
         UserVO userVO = userMapper.getUserVoByUsername(username);
 //        Integer count = iQuestionService.countQuestionsByUserId(userVO.getId());
+        String url = "http://faq-service/v1/questions/count?userId={1}";
+        Integer count = restTemplate.getForObject(url, Integer.class, userVO.getId());
 //        //TODO: 以後增加統計收藏問題的數量
-//        userVO.setQuestions(count).setCollections(0);
+        userVO.setQuestions(count).setCollections(0);
         return userVO;
     }
 

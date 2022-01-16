@@ -41,4 +41,9 @@ public class HomeController {
         }
         throw new ServiceException("需要登錄");
     }
+
+    @GetMapping("/question/create.html")
+    public String create(){
+        return "question/create";
+    }
 }

@@ -109,4 +109,10 @@ public class QuestionController {
         Question question=iQuestionService.getQuestionsById(id);
         return  R.ok(question);
     }
+    
+    @GetMapping("/count")
+    public Integer count(Integer userId){
+        Integer count=iQuestionService.countQuestionsByUserId(userId);
+        return count;
+    }
 }
