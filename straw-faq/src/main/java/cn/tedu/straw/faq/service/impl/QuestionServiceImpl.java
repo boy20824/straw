@@ -50,7 +50,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
     UserQuestionMapper userQuestionMapper;
 
     @Resource
-    RestTemplate restTemplate;
+    RibbonClient ribbonClient;
 
     @Override
     public PageInfo<Question> getMyQuestions(String username, Integer pageNum, Integer pageSize) {
@@ -64,7 +64,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
         //http://sys-service/v1/auth/user?username={1}
 //        String url = "http://sys/v1/auth/user?username={1}";
 //        User user = restTemplate.getForObject(url, User.class, username);
-        User user = getUser(username);
+        User user = ribbonClient.getUser(username);
 //        User user = userMapper.findUserByUsername(username);
         log.debug("當前登錄用戶{}", user);
         if (user == null) {
@@ -103,13 +103,6 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
         return tags;
     }
 
-    //藉由ribbon獲取user訊息
-    private User getUser(String username) {
-        String url = "http://sys-service/v1/auth/user?username={1}";
-        User user = restTemplate.getForObject(url, User.class, username);
-        return user;
-    }
-
     @Override
     @Transactional // 聲明式事務,當前方法中的SQL作為整體執行,執行失敗會回滾到開始階段
     public void saveQuestion(String username, QuestionVO questionVO) {
@@ -120,7 +113,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
         //獲取用戶全部訊息
 //        String url = "http://sys/v1/auth/user?username={1}";
 //        User user = userMapper.findUserByUsername(username);
-        User user = getUser(username);
+        User user = ribbonClient.getUser(username);
         log.debug("當前用戶訊息{}", user);
         //根據標籤名數組創建標籤名列表
         StringBuilder builder = new StringBuilder();
@@ -176,8 +169,9 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
         //保存問題和答題老師關西 questionVo.getTeacherNicknames()
 //        Map<String, User> masterMap = iUserService.getMasterMap();
         //利用Ribbon從Straw-sys服務中全部回答問題的老師
-        String url = "http://sys-service/v1/users/masters";
-        User[] users = restTemplate.getForObject(url, User[].class);
+//        String url = "http://sys-service/v1/users/masters";
+//        User[] users = restTemplate.getForObject(url, User[].class);
+        User[] users = ribbonClient.masters();
         Map<String, User> masterMap = new HashMap<>();
         for (User u : users) {
             masterMap.put(u.getNickName(), u);
@@ -224,7 +218,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
         }
 
 //        User user = userMapper.findUserByUsername(username);
-        User user = getUser(username);
+        User user = ribbonClient.getUser(username);
 
         PageHelper.startPage(pageNum, pageSize);
         List<Question> questions = questionMapper.findTeachersQuestions(user.getId());

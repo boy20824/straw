@@ -15,7 +15,7 @@ let questionApp = new Vue({
             questionId = questionId.substring(1);
 
             $.ajax({
-                url: '/v1/questions/' + questionId,
+                url: '/faq/v1/questions/' + questionId,
                 method: "GET",
                 success: function (r) {
                     console.log("得到問題對象:")
@@ -164,7 +164,7 @@ let answersApp = new Vue({
             //利用Ajax從服務器讀取Answers數據
             $.ajax({
                 // /v1/answers/question/157
-                url: '/v1/answers/question/' + questionId,
+                url: '/faq/v1/answers/question/' + questionId,
                 method: 'GET',
                 success: function (r) {
                     console.log(r)
@@ -197,7 +197,7 @@ let answersApp = new Vue({
                 content:content
             }
             $.ajax({
-                url:'/v1/comments',
+                url:'/faq/v1/comments',
                 method:'POST',
                 data:form,
                 success:function (r){
@@ -228,7 +228,7 @@ let answersApp = new Vue({
                 return;
             }
             $.ajax({
-                url:'/v1/comments/'+commentId+'/delete',
+                url:'/faq/v1/comments/'+commentId+'/delete',
                 method:'GET',
                 success:function (r){
                     console.log(r)
@@ -259,7 +259,7 @@ let answersApp = new Vue({
                 content:content
             }
             $.ajax({
-                url:'/v1/comments/'+commentId+'/update',
+                url:'/faq/v1/comments/'+commentId+'/update',
                 method:'POST',
                 data:form,
                 success:function (r){
@@ -281,7 +281,7 @@ let answersApp = new Vue({
                 return;
             }
             $.ajax({
-                url:'/v1/answers/'+answerId+'/solved',
+                url:'/faq/v1/answers/'+answerId+'/solved',
                 method:'GET',
                 success:function (r){
                     console.log(r);

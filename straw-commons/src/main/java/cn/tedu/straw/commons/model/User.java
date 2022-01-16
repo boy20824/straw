@@ -28,6 +28,9 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    //聲明用戶的type,1是老師,0是學生
+    public static final Integer MASTER=1;
+
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 

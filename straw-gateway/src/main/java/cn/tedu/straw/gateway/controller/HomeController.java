@@ -46,4 +46,17 @@ public class HomeController {
     public String create(){
         return "question/create";
     }
+
+    @GetMapping("/question/detail.html")
+    public String detail(@AuthenticationPrincipal UserDetails userDetails){
+
+        if(userDetails.getAuthorities().contains(STUDENT)){
+            //當前登錄用戶的角色是學生,轉到學生首頁
+            return "question/detail";
+        }else if(userDetails.getAuthorities().contains(TEACHER)){
+            //當前登錄用戶的角色是老師,轉到老師首頁
+            return "question/detail_teacher.html";
+        }
+        throw new ServiceException("需要登錄");
+    }
 }

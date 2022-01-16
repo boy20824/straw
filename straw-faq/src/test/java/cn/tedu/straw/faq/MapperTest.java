@@ -1,9 +1,6 @@
 package cn.tedu.straw.faq;
 
-import cn.tedu.straw.faq.mapper.QuestionMapper;
-import cn.tedu.straw.faq.mapper.QuestionTagMapper;
-import cn.tedu.straw.faq.mapper.TagMapper;
-import cn.tedu.straw.faq.mapper.UserQuestionMapper;
+import cn.tedu.straw.faq.mapper.*;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,11 +23,19 @@ public class MapperTest {
     @Resource
     UserQuestionMapper userQuestionMapper;
 
+    @Resource
+    AnswerMapper answerMapper;
+
+    @Resource
+    CommentMapper commentMapper;
+
     @Test
     public void mappers(){
         log.debug("{}",questionMapper);
         log.debug("{}",questionTagMapper);
         log.debug("{}",tagMapper);
         log.debug("{}",userQuestionMapper);
+        log.debug("{}",answerMapper);
+        log.debug("{}",commentMapper);
     }
 }

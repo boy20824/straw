@@ -27,7 +27,7 @@ let postAnswerApp = new Vue({
                 content: content
             }
             $.ajax({
-                url: '/v1/answers',
+                url: '/faq/v1/answers',
                 method: 'POST',
                 data: form,
                 success: function (r) {
