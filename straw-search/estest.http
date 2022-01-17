@@ -1,0 +1,16 @@
+### 第一個測試
+GET http://localhost:9200
+
+### 分詞測試
+POST http://localhost:9200/_analyze
+Content-Type: application/json
+
+{
+  "text": "Hello World!"
+}
+
+### 在ES中創建一個索引
+PUT http://localhost:9200/demo_index
+
+### 從ES中刪除一個索引
+DELETE http://localhost:9200/demo_index
