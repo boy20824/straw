@@ -14,3 +14,12 @@ PUT http://localhost:9200/demo_index
 
 ### 從ES中刪除一個索引
 DELETE http://localhost:9200/demo_index
+
+### 中文分詞測試 ik 分詞器測試 ik_smart ik_max_word
+POST http://localhost:9200/_analyze
+Content-Type: application/json
+
+{
+  "analyzer": "ik_smart",
+  "text": "世界您好!"
+}
