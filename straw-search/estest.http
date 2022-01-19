@@ -23,3 +23,132 @@ Content-Type: application/json
   "analyzer": "ik_smart",
   "text": "世界您好!"
 }
+
+### 在ES中創建一個索引
+PUT http://localhost:9200/questions
+
+### 從ES中刪除一個索引
+DELETE http://localhost:9200/questions
+
+### 設定questions索引中,文檔的結構
+POST http://localhost:9200/questions/_mapping
+Content-Type: application/json
+
+{
+  "properties": {
+    "title": {
+      "type": "text",
+      "analyzer": "ik_max_word",
+      "search_analyzer": "ik_max_word"
+    },
+    "content": {
+      "type": "text",
+      "analyzer": "ik_max_word",
+      "search_analyzer": "ik_max_word"
+    }
+  }
+}
+
+### 向ES的questions索引中添加文檔數據
+POST http://localhost:9200/questions/_create/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "Java的基本類型有哪些?",
+  "content": "每次面試時候都有人問Java的基本類型,為啥壓!"
+}
+
+### 從ES中獲取文檔,從questions索引中獲取文檔的編號為1的文檔數據
+GET http://localhost:9200/questions/_doc/1
+
+### 向ES的questions索引中添加文檔數據
+POST http://localhost:9200/questions/_create/2
+Content-Type: application/json
+
+{
+  "id": 2,
+  "title": "Java中int類型的數據範圍",
+  "content": "int類型的有效範圍是啥,為啥要記住這個範圍?"
+}
+
+### 向ES的questions索引中添加文檔數據
+POST http://localhost:9200/questions/_create/3
+Content-Type: application/json
+
+{
+  "id": 3,
+  "title": "常用的集合有哪些",
+  "content": "集合是啥壓?,常用在哪些情況?"
+}
+
+### 向ES的questions索引中添加文檔數據
+POST http://localhost:9200/questions/_create/4
+Content-Type: application/json
+
+{
+  "id": 4,
+  "title": "線程創建方式有哪些",
+  "content": "如何創建線程,每一種創建方式適合那些情況"
+}
+
+### 查詢文檔案
+GET http://localhost:9200/questions/_doc/5
+
+### 更新文檔內容
+POST http://localhost:9200/questions/_doc/4/_update
+Content-Type: application/json
+
+{
+  "doc": {
+    "title": "Java線程創建方式有哪些?"
+  }
+}
+
+### 向ES的questions索引中添加文檔數據
+POST http://localhost:9200/questions/_create/5
+Content-Type: application/json
+
+{
+  "id": 5,
+  "title": "12dfggs",
+  "content": "egdzbz"
+}
+
+### 刪除ES中儲存的文檔
+DELETE http://localhost:9200/questions/_doc/5
+
+### 在ES的questions索引中進行搜尋(單一條件)
+POST http://localhost:9200/questions/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "match": {
+      "title": "類型"
+    }
+  }
+}
+
+### 在ES的questions索引中進行搜尋(多條件)
+POST http://localhost:9200/questions/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "match": {
+            "title": "類型"
+          }
+        },
+        {
+          "match": {
+            "content": "類型"
+          }
+        }
+      ]
+    }
+  }
+}
