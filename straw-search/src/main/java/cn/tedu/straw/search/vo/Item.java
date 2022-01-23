@@ -1,6 +1,8 @@
 package cn.tedu.straw.search.vo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.annotation.Id;
@@ -13,6 +15,8 @@ import java.io.Serializable;
 @Data
 @Accessors(chain = true)
 @Slf4j
+@NoArgsConstructor  //創建無參數建構子
+@AllArgsConstructor //創建全部參數的建構子
 //spring ES API 會自動在ES中創建items索引
 @Document(indexName = "items")
 public class Item implements Serializable {
