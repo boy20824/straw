@@ -52,4 +52,12 @@ public interface IQuestionService extends IService<Question> {
      * 根據問題的ID查詢一個問題數據
      */
     Question getQuestionsById(Integer id);
+
+    /**
+     * 返回一頁問題數據
+     * @param pageNum 頁號從1開始
+     * @param pageSize 頁面行數
+     * @return 一頁數據
+     */
+    PageInfo<Question> getQuestions(Integer pageNum,Integer pageSize);
 }

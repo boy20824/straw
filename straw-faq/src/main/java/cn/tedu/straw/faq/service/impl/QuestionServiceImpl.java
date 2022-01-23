@@ -239,4 +239,12 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
         question.setTags(tags);
         return question;
     }
+
+    @Override
+    public PageInfo<Question> getQuestions(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        //為null時,查詢所有數據
+        List<Question> list=questionMapper.selectList(null);
+        return new PageInfo<>(list);
+    }
 }

@@ -35,4 +35,11 @@ public class ServiceTest {
         List<Answer> answerList = iAnswerService.getAnswersByQuestionId(46);
         answerList.forEach(answer -> log.debug("回覆答案{}", answer));
     }
+
+    @Test
+    void getQuestions(){
+        PageInfo<Question> pageInfo=iQuestionService.getQuestions(1,10);
+        pageInfo.getList().forEach(question -> log.debug("{}",question));
+        log.debug("{}",pageInfo);
+    }
 }

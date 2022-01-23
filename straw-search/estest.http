@@ -155,3 +155,6 @@ Content-Type: application/json
 
 ### 檢查sprnig ES 客戶端是否將數據儲到ES中
 GET  http://localhost:9200/items/_doc/1
+
+### 檢索文檔結構
+GET http://localhost:9200/questions/_mapping

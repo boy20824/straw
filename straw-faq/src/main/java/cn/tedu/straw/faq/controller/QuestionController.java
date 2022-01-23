@@ -17,6 +17,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * <p>
  * 前端控制器
@@ -114,5 +116,24 @@ public class QuestionController {
     public Integer count(Integer userId){
         Integer count=iQuestionService.countQuestionsByUserId(userId);
         return count;
+    }
+
+    /*
+    Rest API 用於將Question數據導到straw-search中
+    分頁導出數據,用於返回數據頁數
+     */
+    @GetMapping("/page/count")
+    public Integer pageCount(Integer pageSize){
+        Integer rows=iQuestionService.count();
+        return rows%pageSize==0?rows/pageSize:rows/pageSize+1;
+    }
+
+    /*
+    用於返回一頁數據
+     */
+    @GetMapping("/page")
+    public List<Question> page(Integer pageNum, Integer pageSize){
+        PageInfo<Question> pageInfo=iQuestionService.getQuestions(pageNum,pageSize);
+        return pageInfo.getList();
     }
 }
