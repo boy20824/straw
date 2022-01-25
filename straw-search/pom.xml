@@ -40,6 +40,10 @@
             <groupId>cn.tedu</groupId>
             <artifactId>straw-commons</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

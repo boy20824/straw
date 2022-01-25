@@ -1,0 +1,18 @@
+### 測試Rest客戶端 Query語句
+POST http://localhost:9200/questions/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "bool": {
+      "must": [{
+          "bool": {
+            "should": [{"match": {"title": "java"}}, {"match": {"content": "java"}}]
+          }
+        }, {
+          "bool": {"should": [{"term": {"publicStatus": 1}}, {"term": {"userId": 8}}]
+          }
+        }]
+    }
+  }
+}
