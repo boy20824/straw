@@ -59,4 +59,9 @@ public class HomeController {
         }
         throw new ServiceException("需要登錄");
     }
+    
+    @GetMapping("/search.html")
+    public String search(){
+        return "search";
+    }
 }

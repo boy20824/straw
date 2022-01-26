@@ -87,7 +87,7 @@ public class QuestionController {
      */
     @GetMapping("/teacher")
     @PreAuthorize("hasRole('TEACHER')")
-    public R<PageInfo<Question>> teachers(@AuthenticationPrincipal User user, Integer pageNum) {
+    public R<PageInfo<Question>> teachers(@AuthenticationPrincipal User user,Integer pageNum) {
         if (pageNum == null) {
             pageNum = 1;
         }
