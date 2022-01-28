@@ -1,5 +1,6 @@
 package cn.tedu.straw.search.service.impl;
 
+import cn.tedu.straw.commons.model.Tag;
 import cn.tedu.straw.commons.model.User;
 import cn.tedu.straw.search.mapper.QuestionRepository;
 import cn.tedu.straw.search.service.IQuestionService;
@@ -11,11 +12,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 @Slf4j
@@ -26,6 +32,30 @@ public class QuestionServiceImpl implements IQuestionService {
 
     @Resource
     RestTemplate restTemplate;
+
+    //緩存標籤數據
+    private final ConcurrentHashMap<String, Tag> tagMap = new ConcurrentHashMap<>();
+
+    //第一次在一小時後啟動,之後每一小時清空一次
+    @Scheduled(initialDelay = 1000*60*60*24,fixedRate =1000*60*60*24 )
+    private void clearTagMap(){
+        tagMap.clear();
+    }
+
+    private Map<String, Tag> getTagMap() {
+        if (tagMap.isEmpty()) {
+            synchronized (tagMap) {
+                if (tagMap.isEmpty()) {
+                    String url = "http://faq-service/v1/tags/list";
+                    Tag[] tags = restTemplate.getForObject(url, Tag[].class);
+                    for (Tag tag : tags) {
+                        tagMap.put(tag.getName(), tag);
+                    }
+                }
+            }
+        }
+        return tagMap;
+    }
 
     @Override
     public void sync() {
@@ -66,6 +96,21 @@ public class QuestionServiceImpl implements IQuestionService {
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "createTime");
 
         Page<QuestionVO> questions = questionRepository.queryAllByParam(key, key, user.getId(), pageable);
+        for(QuestionVO questionVO:questions.getContent()){
+            List<Tag> tags=tagNameToTags(questionVO.getTagNames());
+            questionVO.setTags(tags);
+        }
         return Pages.pageInfo(questions);
+    }
+    private List<Tag> tagNameToTags(String tagName){
+        Map<String,Tag>tagMap=getTagMap();
+        String[] names=tagName.split(",\\s?");
+        List<Tag> tags=new ArrayList<>();
+        for (String name:names){
+            Tag tag=tagMap.get(name);
+            tags.add(tag);
+        }
+        System.out.println(tags);
+        return tags;
     }
 }

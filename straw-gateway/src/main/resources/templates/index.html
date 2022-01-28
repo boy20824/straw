@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" xmlns:v-bind="http://www.w3.org/1999/xhtml"
-      xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,8 +20,7 @@
     <nav class="navbar navbar-expand-lg   navbar-light bg-light">
         <a class="navbar-brand" href="index.html"> <img alt="稻草问答" src="img/straw_logo_239x80.png" height="33">
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -33,22 +31,18 @@
                 <a class="nav-item nav-link active" href="personal/collect.html">收藏</a>
             </div>
         </div>
-        <div class="form-inline my-2 my-lg-0" id="searchApp">
-            <input class="form-control form-control-sm mr-sm-2 rounded-pill" type="search" placeholder="Search"
-                   aria-label="Search" v-model="key">
-            <button class="btn btn-sm btn-outline-secondary my-2 my-sm-0 rounded-pill" type="button"><i
-                    class="fa fa-search" aria-hidden="true" @click="search"></i></button>
+        <div class="form-inline my-2 my-lg-0" id="searchApp" th:fragment="searchApp">
+            <input class="form-control form-control-sm mr-sm-2 rounded-pill" type="search" placeholder="Search" aria-label="Search" v-model="key">
+            <button class="btn btn-sm btn-outline-secondary my-2 my-sm-0 rounded-pill" type="button"><i class="fa fa-search" aria-hidden="true" @click="search"></i></button>
         </div>
         <a type="button" class="btn btn-outline-primary btn-sm mx-2" href="question/create.html">我要提问</a>
         <div id="noticeCount">
-            <button type="button" class="btn btn-default btn-xs fa fa-bell-o" data-toggle="modal"
-                    data-target="#noticeModal">
+            <button type="button" class="btn btn-default btn-xs fa fa-bell-o" data-toggle="modal" data-target="#noticeModal">
                 <span class="badge badge-warning badge-pill">2</span>
             </button>
         </div>
         <div class="dropdown   py-1 mr-3 ">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img style="width: 30px;height: 30px;border-radius: 50%;" src="img/user.jpg">
             </button>
             <div class="dropdown-menu dropdown-menu-sm-left text-sm border-0" aria-labelledby="dropdownMenu2">
@@ -62,8 +56,7 @@
         </div>
     </nav>
     <!-- 消息modal-->
-    <div class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
+    <div class="modal fade" id="noticeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -71,18 +64,15 @@
                         <span aria-hidden="true">×</span>
                     </button>
                     <div id="myTab" role="tablist" class="nav nav-tabs">
-                        <a href="#commentNotice" class="nav-item nav-link active text-black" data-toggle="tab"
-                           aria-controls="commentNotice" aria-selected="true">
+                        <a href="#commentNotice" class="nav-item nav-link active text-black" data-toggle="tab" aria-controls="commentNotice" aria-selected="true">
                             通知
                         </a>
-                        <a href="#announcement" class="nav-item nav-link text-black" data-toggle="tab"
-                           aria-controls="announcement" aria-selected="true">
+                        <a href="#announcement" class="nav-item nav-link text-black" data-toggle="tab" aria-controls="announcement" aria-selected="true">
                             公告
                         </a>
                     </div>
                     <div id="myTabContent" class="tab-content col-12">
-                        <div class="tab-pane fade show active row" id="commentNotice" role="tabpanel"
-                             aria-labelledby="noAnswer-tab">
+                        <div class="tab-pane fade show active row" id="commentNotice" role="tabpanel" aria-labelledby="noAnswer-tab">
                             <div class="list-group list-group-flush">
                                 <h6 class="text-dark my-2" style="display: none">暂无新消息！</h6>
                                 <a href="notice/all.html" style="display: none" class="text-info">查看历史消息</a>
@@ -112,8 +102,7 @@
         </div>
     </div><!-- 消息modal-->
     <!-- 查看邀请码modal-->
-    <div class="modal fade" id="invitecodeModal" tabindex="-1" role="dialog" aria-labelledby="invitecodeModal"
-         aria-hidden="true">
+    <div class="modal fade" id="invitecodeModal" tabindex="-1" role="dialog" aria-labelledby="invitecodeModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
 
@@ -168,8 +157,7 @@
 <div class="container-fluid" id="tagsApp" th:fragment="tags_nav">
     <div class="nav font-weight-light">
         <a href="tag/tag_question.html" class="nav-item nav-link text-info"><small>全部</small></a>
-        <a href="tag/tag_question.html" class="nav-item nav-link text-info" v-for="tag in tags"><small
-                v-text="tag.name">Java基础</small></a>
+        <a href="tag/tag_question.html" class="nav-item nav-link text-info" v-for="tag in tags"><small v-text="tag.name">Java基础</small></a>
     </div>
 </div>
 <!-- 我的问答 -->
@@ -190,31 +178,25 @@
                         <div class="media-body w-50">
                             <div class="row">
                                 <div class="col-md-12 col-lg-2">
-                                    <span class="badge badge-pill badge-warning" style="display: none"
-                                          v-show="question.status==0">未回复</span>
-                                    <span class="badge badge-pill badge-info" style="display: none"
-                                          v-show="question.status==1">已回复</span>
+                                    <span class="badge badge-pill badge-warning" style="display: none" v-show="question.status==0">未回复</span>
+                                    <span class="badge badge-pill badge-info" style="display: none" v-show="question.status==1">已回复</span>
                                     <span class="badge badge-pill badge-success" v-show="question.status==2">已解决</span>
                                 </div>
                                 <div class="col-md-12 col-lg-10">
                                     <h5 class="mt-0 mb-1 text-truncate">
-                                        <a class="text-dark" href="question/detail.html"
-                                           v-text="question.title"
-                                            v-bind:href="'question/detail.html?'+question.id">
+                                        <a class="text-dark" href="question/detail.html" v-text="question.title" v-bind:href="'question/detail.html?'+question.id">
                                             eclipse 如何导入项目？
                                         </a>
                                     </h5>
                                 </div>
                             </div>
-                            <div class="font-weight-light text-truncate text-wrap text-justify mb-2"
-                                 style="height: 70px;">
+                            <div class="font-weight-light text-truncate text-wrap text-justify mb-2" style="height: 70px;">
                                 <p v-html="question.content">eclipse 如何导入项目？</p>
                             </div>
                             <div class="row">
                                 <div class="col-12 mt-1 text-info">
                                     <i class="fa fa-tags" aria-hidden="true"></i>
-                                    <a class="text-info badge badge-pill bg-light" href="tag/tag_question.html"
-                                       v-for="tag in question.tags">
+                                    <a class="text-info badge badge-pill bg-light" href="tag/tag_question.html" v-for="tag in question.tags">
                                         <small v-text="tag.name">Java基础</small>
                                     </a>
                                 </div>
@@ -230,20 +212,15 @@
                             </div>
                         </div>
                         <!-- / class="media-body"-->
-                        <img src="img/tags/11.jpg" v-bind:src="question.tagImage" class="ml-3 border img-fluid rounded"
-                             alt="" width="208" height="116">
+                        <img src="img/tags/11.jpg" v-bind:src="question.tagImage" class="ml-3 border img-fluid rounded" alt="" width="208" height="116">
                     </div>
                     <div class="row mt-2">
                         <div class="col-6 offset-3">
                             <nav aria-label="Page navigation example">
                                 <div class="pagination">
-                                    <a class="page-item page-link" href="#"
-                                       v-on:click.prevent="loadQuestions(pageInfo.prePage)">上一页</a>
-                                    <a class="page-item page-link" href="#" v-for="n in pageInfo.navigatepageNums"
-                                       v-on:click.prevent="loadQuestions(n)"
-                                       v-bind:class="{'bg-primary text-light':n===pageInfo.pageNum}" v-text="n">1</a>
-                                    <a class="page-item page-link" href="#"
-                                       v-on:click.prevent="loadQuestions(pageInfo.nextPage)">下一页</a>
+                                    <a class="page-item page-link" href="#" v-on:click.prevent="loadQuestions(pageInfo.prePage)">上一页</a>
+                                    <a class="page-item page-link" href="#" v-for="n in pageInfo.navigatepageNums" v-on:click.prevent="loadQuestions(n)" v-bind:class="{'bg-primary text-light':n===pageInfo.pageNum}" v-text="n">1</a>
+                                    <a class="page-item page-link" href="#" v-on:click.prevent="loadQuestions(pageInfo.nextPage)">下一页</a>
                                 </div>
                             </nav>
                         </div>
@@ -253,8 +230,7 @@
         </div>
         <div class="col-md-12 col-lg-4 pb-2">
             <!--个人信息-->
-            <div class="container-fluid font-weight-light" id="userApp"
-                 th:fragment="user_info">
+            <div class="container-fluid font-weight-light" id="userApp" th:fragment="user_info">
                 <div class="card">
                     <h5 class="card-header" v-text="user.nickname">陈某</h5>
                     <div class="card-body">

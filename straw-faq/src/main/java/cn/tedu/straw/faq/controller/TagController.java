@@ -34,4 +34,14 @@ public class TagController {
         List<Tag> list=iTagService.getTags();
         return R.ok(list);
     }
+
+    /*
+    請求URL:/v1/tags/list
+     */
+    @GetMapping("/list")
+    public List<Tag> list(){
+        List<Tag> list=iTagService.getTags();
+        return list;
+    }
+
 }
