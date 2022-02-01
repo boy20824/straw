@@ -40,7 +40,7 @@
                 <a class="nav-item nav-link active" href="personal/collect.html">收藏</a>
             </div>
         </div>
-        <div class="form-inline my-2 my-lg-0">
+        <div class="form-inline my-2 my-lg-0" id="searchApp" th:replace="index::searchApp">
             <input class="form-control form-control-sm mr-sm-2 rounded-pill" v-model="keyword" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-sm btn-outline-secondary my-2 my-sm-0 rounded-pill" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
         </div>
@@ -457,6 +457,7 @@
 <script src="js/utils.js"></script>
 <script src="js/tags_nav.js"></script>
 <script src="js/user_info.js"></script>
-<script src="js/index_teacher.js"></script>
+<script src="js/search_app.js"></script>
+<script src="js/search.js"></script>
 </body>
 </html>

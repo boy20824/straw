@@ -26,6 +26,7 @@
         <module>straw-commons</module>
         <module>straw-faq</module>
         <module>straw-search</module>
+        <module>straw-kafka</module>
     </modules>
 
     <dependencies>
