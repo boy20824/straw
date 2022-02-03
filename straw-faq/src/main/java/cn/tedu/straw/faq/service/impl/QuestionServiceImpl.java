@@ -1,6 +1,7 @@
 package cn.tedu.straw.faq.service.impl;
 
 import cn.tedu.straw.commons.model.*;
+import cn.tedu.straw.faq.kafka.KafkaProducer;
 import cn.tedu.straw.faq.mapper.QuestionMapper;
 import cn.tedu.straw.faq.mapper.QuestionTagMapper;
 import cn.tedu.straw.faq.mapper.UserQuestionMapper;
@@ -51,6 +52,9 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
 
     @Resource
     RibbonClient ribbonClient;
+
+    @Resource
+    private KafkaProducer kafkaProducer;
 
     @Override
     public PageInfo<Question> getMyQuestions(String username, Integer pageNum, Integer pageSize) {
@@ -191,6 +195,9 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
                 throw new ServiceException("數據庫繁忙中,請稍後在嘗試");
             }
         }
+
+        //問題保存完成,就將問題發送到kafka
+        kafkaProducer.sendQuestion(question);
     }
 
     @Override

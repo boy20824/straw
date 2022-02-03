@@ -19,4 +19,6 @@ public interface IQuestionService {
      * @return 一頁搜索結果
      */
     PageInfo<QuestionVO> search(String key,String username,Integer pageNum,Integer pageSize);
+
+    void saveQuestion(QuestionVO questionVO);
 }

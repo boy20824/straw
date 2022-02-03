@@ -113,4 +113,9 @@ public class QuestionServiceImpl implements IQuestionService {
         System.out.println(tags);
         return tags;
     }
+
+    @Override
+    public void saveQuestion(QuestionVO questionVO) {
+        questionRepository.save(questionVO);
+    }
 }
